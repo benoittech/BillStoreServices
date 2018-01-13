@@ -37,11 +37,11 @@ namespace DataService.Implementation
             return retrievedResult.Result as UserInfo;
         }
 
-        public async void DeleteUser(UserInfo user)
+        public async Task DeleteUser(string countryCode, string phoneNumber)
         {
             var tableClient = _cloudStorageService.GetStorageTableClient();
             var table = tableClient.GetTableReference(USERTABLENAME);
-            TableOperation retrieveOperation = TableOperation.Retrieve<Invoice>(user.PhoneNumber, user.CountryCode);
+            TableOperation retrieveOperation = TableOperation.Retrieve<Invoice>(countryCode, phoneNumber);
 
             var retrievedResult = await table.ExecuteAsync(retrieveOperation);
 

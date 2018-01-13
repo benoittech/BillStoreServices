@@ -15,6 +15,7 @@ namespace Services.Controllers
     public class InvoiceController : Controller
     {
         private readonly InvoiceService invoiceService;
+
         public InvoiceController(IConfiguration configuration)
         {
             invoiceService = new InvoiceService(configuration);
@@ -22,28 +23,36 @@ namespace Services.Controllers
 
         // GET: api/Invoice
         [HttpGet]
-        public async Task<IEnumerable<Invoice>> GetInvoice(DateTime dateTime, string phoneNumber)
+        public async Task<IEnumerable<Invoice>> GetInvoices(DateTime dateTime, string phoneNumber)
         {
-            return await invoiceService.GetUserInvoice(dateTime, phoneNumber);
-        }        
-        
+            return await invoiceService.GetUserInvoices(dateTime, phoneNumber);
+        }
+
+        [HttpGet("{phoneNumber}/{id}")]
+        public async Task<Invoice> GetInvoice(string id, string phoneNumber)
+        {
+            return await invoiceService.GetInvoiceByIdAndPhone(phoneNumber, id);
+        }
+
         // POST: api/Invoice
         [HttpPost]
-        public async Task Post([FromBody]Invoice value)
-        {
-            await invoiceService.SaveInvoice(value);
+        public async Task Post([FromBody]Invoice invoice)
+        {           
+            await invoiceService.SaveInvoice(invoice);
         }
         
         // PUT: api/Invoice/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public async Task<Invoice> Put([FromBody]Invoice invoice)
         {
+            return await invoiceService.UpdateInvoice(invoice);
         }
         
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{phoneNumber}/{id}")]
+        public async Task Delete(string id, string phoneNumber)
         {
+            await invoiceService.DeleteInvoice(phoneNumber, id);
         }
     }
 }

@@ -12,5 +12,10 @@ namespace BillStoreDataService.DataService.Interfaces
         Task<List<Invoice>> GetAllInvoiceForUser(DateTime time, string userPhoneNumber);
 
         Task DeleteInvoice(string userPhone, string invoiceNumber);
+
+        Task<Invoice> GetInvoiceDetails(string InvoiceId, string userPhone);
+
+        Task UpdateUser(Invoice invoice);
+        
     }
 }

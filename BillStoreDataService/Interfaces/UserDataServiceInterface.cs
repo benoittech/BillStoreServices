@@ -7,7 +7,7 @@ namespace BillStoreDataService.DataService.Interfaces
     {
         Task<UserInfo> GetUser(string phoneNumber, string countryCode);
 
-        void DeleteUser(UserInfo user);
+        Task DeleteUser(string countryCode, string phoneNumber);
 
         Task<UserInfo> Adduser(UserInfo user);
 

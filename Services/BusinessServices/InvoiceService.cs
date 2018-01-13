@@ -21,10 +21,11 @@ namespace Services.BusinessServices
 
         public async Task SaveInvoice(Invoice invoice)
         {
+           invoice.InvoiceNumber = new Guid().ToString();
            await  invoiceDataService.SaveInvoice(invoice);
         }
 
-        public async Task<List<Invoice>> GetUserInvoice(DateTime time, string userPhoneNumber)
+        public async Task<List<Invoice>> GetUserInvoices(DateTime time, string userPhoneNumber)
         {
             var invoice =  InvoiceStub.GetInvoice();
             await invoiceDataService.SaveInvoice(invoice);
@@ -32,7 +33,21 @@ namespace Services.BusinessServices
             return await invoiceDataService.GetAllInvoiceForUser(time, userPhoneNumber);
         }
 
+        public async Task<Invoice> UpdateInvoice(Invoice invoice)
+        {
+            await invoiceDataService.SaveInvoice(invoice);
+            return await invoiceDataService.GetInvoiceDetails(invoice.InvoiceNumber, invoice.PhoneNumber);
+        }
 
+        public async Task DeleteInvoice(string phoneNumber, string id)
+        {
+            await invoiceDataService.DeleteInvoice(phoneNumber, id);           
+        }
+
+        public async Task<Invoice> GetInvoiceByIdAndPhone(string phoneNumber, string id)
+        {
+            return await invoiceDataService.GetInvoiceDetails(phoneNumber, id);
+        }
 
     }
 }
