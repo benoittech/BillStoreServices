@@ -7,8 +7,10 @@ namespace BillStoreService.Model
 {
     public class OneTimePassword : TableEntity
     {
-        public OneTimePassword(string phoneNumber, string otp) : base("OTP", phoneNumber + DateTime.Now.ToString("YYYY-MM-DD"))
+        public OneTimePassword(string phoneNumber, string otp)
         {
+            this.RowKey = phoneNumber + DateTime.Now.ToString("YYYY-MM-DD");
+            this.PartitionKey = "OTP";
             this.PhoneNumber = phoneNumber;
             this.OTPassword = otp;
             this.ExpiryTime = DateTime.Now.AddMinutes(5);

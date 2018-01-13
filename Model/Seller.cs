@@ -9,8 +9,8 @@ namespace BillStoreService.Model
     {
         public Seller(string sellerCountry, string phoneNumber) :base(sellerCountry, phoneNumber)
         {
-            this.SellerCountry = sellerCountry;
-            this.PhoneNumber = phoneNumber;
+            this.SellerCountry = this.PartitionKey = sellerCountry;
+            this.PhoneNumber = this.RowKey = phoneNumber;
         }
 
         public string SellerName { get; set; }

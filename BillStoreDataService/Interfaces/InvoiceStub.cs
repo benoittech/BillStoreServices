@@ -10,11 +10,11 @@ namespace DataService.Interfaces
     {
         private static Random random = new Random();
         private static int invoiceNumber = 1;
-        public async static Task<List<Invoice>> GetInvoice()
+        public static Invoice GetInvoice()
         {
             int value = random.Next(0, 50);
             long amount = random.Next(0, 999);
-            var invoice = new Invoice()
+            var invoice = new Invoice("9886160634", (invoiceNumber + 1 ).ToString())
             {
                 BillId = value,
                 BillAmount = amount,
@@ -32,7 +32,7 @@ namespace DataService.Interfaces
                 Address = "dDF"                 
             };
 
-            return new List<Invoice>() { invoice };
+            return invoice ;
         }
 
         public static string GetBillItems()

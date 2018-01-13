@@ -43,7 +43,7 @@ namespace DataService.Implementation
             var invoiceFilter = new TableQuery<Invoice>().Where(TableQuery.CombineFilters(
                 TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, userPhoneNumber),           
                 TableOperators.And,
-                TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThanOrEqual, time)));
+                TableQuery.GenerateFilterConditionForDate("Timestamp", QueryComparisons.GreaterThanOrEqual, time)));
 
             var tableClient = _cloudStorageService.GetStorageTableClient();
             var table = tableClient.GetTableReference(_INVOICETABLENAME);

@@ -26,10 +26,10 @@ namespace Services.BusinessServices
 
         public async Task<List<Invoice>> GetUserInvoice(DateTime time, string userPhoneNumber)
         {
-             return await InvoiceStub.GetInvoice();
-            //await invoiceDataService.SaveInvoice(invoice);
+            var invoice =  InvoiceStub.GetInvoice();
+            await invoiceDataService.SaveInvoice(invoice);
 
-            //return await invoiceDataService.GetAllInvoiceForUser(time, userPhoneNumber);
+            return await invoiceDataService.GetAllInvoiceForUser(time, userPhoneNumber);
         }
 
 

@@ -4,10 +4,10 @@ namespace BillStoreService.Model
 {
     public class Invoice : TableEntity
     {
-        public Invoice(string PhoneNumber, string invoiceNumber) : base(PhoneNumber, invoiceNumber)
+        public Invoice(string phoneNumber, string invoiceNumber) 
         {
-            
-
+            this.RowKey = this.InvoiceNumber = invoiceNumber;
+            this.PartitionKey = PhoneNumber = phoneNumber;
         }
 
         
